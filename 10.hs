@@ -28,3 +28,20 @@ ctl_but_last :: [a] -> a
 ctl_but_last (x:[_]) = x
 ctl_but_last (x:xs) = ctl_but_last xs
 ctl_but_last _ = error "Not an empty list"
+
+
+-- Problem #3
+-- Find the K'th element of a list. The first element in the list is number 1.
+--
+-- Example:
+-- Prelude> elementAt [1,2,3] 2
+-- 2
+-- Prelude> elementAt "haskell" 5
+-- 'e'
+ctl_elementAt :: Eq a => [a] -> Int -> a
+ctl_elementAt [] _ = error "Not an empty list"
+ctl_elementAt (x:xs) k
+    | k < 1     = error "'k' starts from 1"
+    | k == 1    = x
+    | xs == []  = error "'k' is out of bounds"
+    | otherwise = ctl_elementAt xs (k - 1)
