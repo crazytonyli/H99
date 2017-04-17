@@ -1,3 +1,8 @@
+module P10
+( ctl_last
+, ctl_butLast
+) where
+
 -- Problem 1 to 10
 -- https://wiki.haskell.org/99_questions/1_to_10
 
@@ -24,10 +29,11 @@ ctl_last _ = error "Not an empty list"
 -- 3
 -- Prelude> myButLast ['a'..'z']
 -- 'y'
-ctl_but_last :: [a] -> a
-ctl_but_last (x:[_]) = x
-ctl_but_last (x:xs) = ctl_but_last xs
-ctl_but_last _ = error "Not an empty list"
+ctl_butLast :: [a] -> a
+ctl_butLast [] = error "Not an empty list"
+ctl_butLast [_] = error "Not enough elements in list"
+ctl_butLast [x,_] = x
+ctl_butLast (x:xs) = ctl_butLast xs
 
 
 -- Problem #3
