@@ -45,3 +45,16 @@ ctl_elementAt (x:xs) k
     | k == 1    = x
     | xs == []  = error "'k' is out of bounds"
     | otherwise = ctl_elementAt xs (k - 1)
+
+
+-- Problem #4
+-- Find the number of elements of a list.
+--
+-- Example:
+-- Prelude> myLength [123, 456, 789]
+-- 3
+-- Prelude> myLength "Hello, world!"
+-- 13
+ctl_length :: [a] -> Int
+ctl_length [] = 0
+ctl_length (_:xs) = ctl_length xs + 1
