@@ -75,7 +75,8 @@ ctl_reverse (x:xs) = ctl_reverse xs ++ [x]
 
 
 -- Problem 6
--- Find out whether a list is a palindrome. A palindrome can be read forward or backward; e.g. (x a m a x).
+-- Find out whether a list is a palindrome. A palindrome can be read forward or
+-- backward; e.g. (x a m a x).
 --
 -- Example:
 -- *Main> isPalindrome [1,2,3]
@@ -86,3 +87,25 @@ ctl_reverse (x:xs) = ctl_reverse xs ++ [x]
 -- True
 ctl_isPalindrome :: Eq a => [a] -> Bool
 ctl_isPalindrome xs = xs == (ctl_reverse xs)
+
+
+-- Problem 7
+-- Flatten a nested list structure.
+--
+-- Transform a list, possibly holding lists as elements into a `flat' list by
+-- replacing each list with its elements (recursively).
+--
+-- Example:
+-- We have to define a new data type, because lists in Haskell are homogeneous.
+--
+--  data NestedList a = Elem a | List [NestedList a]
+-- *Main> flatten (Elem 5)
+-- [5]
+-- *Main> flatten (List [Elem 1, List [Elem 2, List [Elem 3, Elem 4], Elem 5]])
+-- [1,2,3,4,5]
+-- *Main> flatten (List [])
+-- []
+data NestedList a = Elem a | List [NestedList a]
+ctl_flatten :: NestedList a -> [a]
+ctl_flatten (Elem x) = [x]
+ctl_flatten (List xs) = foldr (\x xs -> ctl_flatten x ++ xs) [] xs
