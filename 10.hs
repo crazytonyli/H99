@@ -58,3 +58,17 @@ ctl_elementAt (x:xs) k
 ctl_length :: [a] -> Int
 ctl_length [] = 0
 ctl_length (_:xs) = ctl_length xs + 1
+
+
+-- Problem 5
+-- Reverse a list.
+--
+-- Example:
+-- Prelude> myReverse "A man, a plan, a canal, panama!"
+-- "!amanap ,lanac a ,nalp a ,nam A"
+-- Prelude> myReverse [1,2,3,4]
+-- [4,3,2,1]
+ctl_reverse :: [a] -> [a]
+ctl_reverse [] = []
+ctl_reverse [x] = [x]
+ctl_reverse (x:xs) = ctl_reverse xs ++ [x]
