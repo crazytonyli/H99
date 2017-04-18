@@ -50,3 +50,9 @@ main = hspec $ do
         it "flattens a nested list structure" $ do
             ctl_flatten (Elem 5) `shouldBe` [5]
             ctl_flatten (List [Elem 1, List [Elem 2, List [Elem 3, Elem 4], Elem 5]]) `shouldBe` [1,2,3,4,5]
+
+    describe "Problem #8" $ do
+        it "eliminates consecutive duplicates of list elements." $ do
+            ctl_compress "" `shouldBe` ""
+            ctl_compress "abcd" `shouldBe` "abcd"
+            ctl_compress "aaaabccaadeeee" `shouldBe` "abcade"

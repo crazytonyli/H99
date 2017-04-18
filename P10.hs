@@ -7,6 +7,7 @@ module P10
 , ctl_isPalindrome
 , ctl_flatten
 , NestedList (..)
+, ctl_compress
 ) where
 
 -- Problem 1 to 10
@@ -120,4 +121,22 @@ ctl_isPalindrome xs = xs == (ctl_reverse xs)
 data NestedList a = Elem a | List [NestedList a]
 ctl_flatten :: NestedList a -> [a]
 ctl_flatten (Elem x) = [x]
-ctl_flatten (List xs) = foldr (\x xs -> ctl_flatten x ++ xs) [] xs
+ctl_flatten (List xs) = foldl (\r x -> r ++ ctl_flatten x) [] xs
+
+
+-- Problem 8
+-- Eliminate consecutive duplicates of list elements.
+--
+-- If a list contains repeated elements they should be replaced with a single
+-- copy of the element. The order of the elements should not be changed.
+--
+-- Example:
+-- > compress "aaaabccaadeeee"
+-- "abcade"
+ctl_compress :: Eq a => [a] -> [a]
+ctl_compress xs = foldl
+    (\r x ->
+        case r of
+            [] -> [x]
+            _  -> if last r == x then r else r ++ [x])
+    [] xs
