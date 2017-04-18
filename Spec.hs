@@ -1,4 +1,5 @@
 import P10
+import P20
 import Test.Hspec
 import Control.Exception (evaluate)
 
@@ -65,3 +66,7 @@ main = hspec $ do
     describe "Problem #10" $ do
         it "encodes duplicates in a list" $ do
             ctl_encode "aaaabccaadeeee" `shouldBe` [(4,'a'),(1,'b'),(2,'c'),(2,'a'),(1,'d'),(4,'e')]
+
+    describe "Problem #11" $ do
+        it "encodes duplicated in a list - 2" $ do
+            ctl_encode2 "abbcccdddd" `shouldBe` [Single 'a', (Multiple 2 'b'), (Multiple 3 'c'), (Multiple 4 'd')]
