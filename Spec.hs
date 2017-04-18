@@ -56,3 +56,8 @@ main = hspec $ do
             ctl_compress "" `shouldBe` ""
             ctl_compress "abcd" `shouldBe` "abcd"
             ctl_compress "aaaabccaadeeee" `shouldBe` "abcade"
+
+    describe "Problem #9" $ do
+        it "packs into sublists" $ do
+            ctl_pack "abbbccdee" `shouldBe` ["a","bbb","cc","d","ee"]
+            ctl_pack "aabbcddee" `shouldBe` ["aa","bb","c","dd","ee"]

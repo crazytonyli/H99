@@ -8,6 +8,7 @@ module P10
 , ctl_flatten
 , NestedList (..)
 , ctl_compress
+, ctl_pack
 ) where
 
 -- Problem 1 to 10
@@ -140,3 +141,23 @@ ctl_compress xs = foldl
             [] -> [x]
             _  -> if last r == x then r else r ++ [x])
     [] xs
+
+
+-- Problem 9
+-- Pack consecutive duplicates of list elements into sublists. If a list
+-- contains repeated elements they should be placed in separate sublists.
+--
+-- Example:
+-- *Main> pack ['a', 'a', 'a', 'a', 'b', 'c', 'c', 'a',
+--             'a', 'd', 'e', 'e', 'e', 'e']
+-- ["aaaa","b","cc","aa","d","eeee"]
+ctl_pack :: Eq a => [a] -> [[a]]
+ctl_pack xs = foldl
+    (\r x ->
+        let lr = last r in
+        case lr of
+            [] -> [[x]]
+            _  -> if head lr == x
+                  then take (length r - 1) r ++ [lr ++ [x]]
+                  else r ++ [[x]])
+    [[]] xs
