@@ -61,3 +61,7 @@ main = hspec $ do
         it "packs into sublists" $ do
             ctl_pack "abbbccdee" `shouldBe` ["a","bbb","cc","d","ee"]
             ctl_pack "aabbcddee" `shouldBe` ["aa","bb","c","dd","ee"]
+
+    describe "Problem #10" $ do
+        it "encodes duplicates in a list" $ do
+            ctl_encode "aaaabccaadeeee" `shouldBe` [(4,'a'),(1,'b'),(2,'c'),(2,'a'),(1,'d'),(4,'e')]
