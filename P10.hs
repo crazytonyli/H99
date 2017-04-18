@@ -1,6 +1,12 @@
 module P10
 ( ctl_last
 , ctl_butLast
+, ctl_elementAt
+, ctl_length
+, ctl_reverse
+, ctl_isPalindrome
+, ctl_flatten
+, NestedList (..)
 ) where
 
 -- Problem 1 to 10
@@ -44,12 +50,12 @@ ctl_butLast (x:xs) = ctl_butLast xs
 -- 2
 -- Prelude> elementAt "haskell" 5
 -- 'e'
-ctl_elementAt :: Eq a => [a] -> Int -> a
+ctl_elementAt :: [a] -> Int -> a
 ctl_elementAt [] _ = error "Not an empty list"
 ctl_elementAt (x:xs) k
     | k < 1     = error "'k' starts from 1"
     | k == 1    = x
-    | xs == []  = error "'k' is out of bounds"
+    | null xs   = error "'k' is out of bounds"
     | otherwise = ctl_elementAt xs (k - 1)
 
 
