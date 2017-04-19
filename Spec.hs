@@ -1,5 +1,6 @@
 import P10
 import P20
+import P30
 import Test.Hspec
 import Control.Exception (evaluate)
 
@@ -122,3 +123,18 @@ main = hspec $ do
             ctl_removeAt 2 "abcde" `shouldBe` ('b', "acde")
             evaluate (ctl_removeAt 0 "abcde") `shouldThrow` anyErrorCall
             evaluate (ctl_removeAt 10 "abcde") `shouldThrow` anyErrorCall
+
+    describe "Problem #21" $ do
+        it "inserts an element at a given position into a list" $ do
+            ctl_insertAt 'X' "abcd" 0 `shouldBe` "Xabcd"
+            ctl_insertAt 'X' "abcd" 1 `shouldBe` "Xabcd"
+            ctl_insertAt 'X' "abcd" 2 `shouldBe` "aXbcd"
+            ctl_insertAt 'X' "abcd" 5 `shouldBe` "abcdX"
+            ctl_insertAt 'X' "abcd" 9 `shouldBe` "abcdX"
+
+    describe "Problem #22" $ do
+        it "creates a list containing all integers within a given range" $ do
+            evaluate (ctl_range 1 0) `shouldThrow` anyErrorCall
+            ctl_range 1 1 `shouldBe` [1]
+            ctl_range 1 2 `shouldBe` [1,2]
+            ctl_range 1 3 `shouldBe` [1,2,3]
