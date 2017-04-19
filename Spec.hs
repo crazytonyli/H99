@@ -74,3 +74,51 @@ main = hspec $ do
     describe "Problem #12" $ do
         it "decodes a run-length encoded list" $ do
             ctl_decode [Single 'a', (Multiple 2 'b'), (Multiple 3 'c'), (Multiple 4 'd')] `shouldBe` "abbcccdddd"
+
+    describe "Problem #14" $ do
+        it "duplicates the elements of a list" $ do
+            ctl_dupli ([] :: [Int]) `shouldBe` []
+            ctl_dupli [1] `shouldBe` [1,1]
+            ctl_dupli [1,2,3] `shouldBe` [1,1,2,2,3,3]
+
+    describe "Problem #15" $ do
+        it "replicates the elements of a list" $ do
+            ctl_repli "abc" 0 `shouldBe` ""
+            ctl_repli "abc" 1 `shouldBe` "abc"
+            ctl_repli "abc" 2 `shouldBe` "aabbcc"
+            ctl_repli "abc" 3 `shouldBe` "aaabbbccc"
+
+    describe "Problem #16" $ do
+        it "drops every N'th element from a list" $ do
+            ctl_dropEvery "abcdefg" 0 `shouldBe` ""
+            ctl_dropEvery "abcdefg" 1 `shouldBe` ""
+            ctl_dropEvery "abcdefg" 2 `shouldBe` "aceg"
+            ctl_dropEvery "abcdefg" 3 `shouldBe` "abdeg"
+            ctl_dropEvery "abcdefg" 4 `shouldBe` "abcefg"
+            ctl_dropEvery "abcdefg" 10 `shouldBe` "abcdefg"
+
+    describe "Problem #17" $ do
+        it "splits a list into two parts" $ do
+            ctl_split "" 3 `shouldBe` ("", "")
+            ctl_split "ab" 3 `shouldBe` ("ab", "")
+            ctl_split "abc" 3 `shouldBe` ("abc", "")
+            ctl_split "abcde" 3 `shouldBe` ("abc", "de")
+
+    describe "Problem #18" $ do
+        it "extracts a slice from a list" $ do
+            ctl_slice "abcdefg" 2 1 `shouldBe` ""
+            ctl_slice "abcdefg" 1 3 `shouldBe` "abc"
+            ctl_slice "abcdefg" 2 4 `shouldBe` "bcd"
+
+    describe "Problem #19" $ do
+        it "rotates a list N places to the left" $ do
+            ctl_rotate "abcdefgh" 3 `shouldBe` "defghabc"
+            ctl_rotate "abcdefgh" 11 `shouldBe` "defghabc"
+            ctl_rotate "abcdefgh" (-5) `shouldBe` "defghabc"
+            ctl_rotate "abcdefgh" (-13) `shouldBe` "defghabc"
+
+    describe "Problem #20" $ do
+        it "removes the K'th element from a list" $ do
+            ctl_removeAt 2 "abcde" `shouldBe` ('b', "acde")
+            evaluate (ctl_removeAt 0 "abcde") `shouldThrow` anyErrorCall
+            evaluate (ctl_removeAt 10 "abcde") `shouldThrow` anyErrorCall
