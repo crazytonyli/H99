@@ -70,3 +70,7 @@ main = hspec $ do
     describe "Problem #11" $ do
         it "encodes duplicated in a list - 2" $ do
             ctl_encode2 "abbcccdddd" `shouldBe` [Single 'a', (Multiple 2 'b'), (Multiple 3 'c'), (Multiple 4 'd')]
+
+    describe "Problem #12" $ do
+        it "decodes a run-length encoded list" $ do
+            ctl_decode [Single 'a', (Multiple 2 'b'), (Multiple 3 'c'), (Multiple 4 'd')] `shouldBe` "abbcccdddd"
