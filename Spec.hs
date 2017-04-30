@@ -121,6 +121,8 @@ main = hspec $ do
     describe "Problem #20" $ do
         it "removes the K'th element from a list" $ do
             ctl_removeAt 2 "abcde" `shouldBe` ('b', "acde")
+            ctl_removeAt 1 "abcde" `shouldBe` ('a', "bcde")
+            ctl_removeAt 5 "abcde" `shouldBe` ('e', "abcd")
             evaluate (ctl_removeAt 0 "abcde") `shouldThrow` anyErrorCall
             evaluate (ctl_removeAt 10 "abcde") `shouldThrow` anyErrorCall
 

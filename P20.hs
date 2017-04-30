@@ -169,7 +169,7 @@ ctl_rotate xs n =
 -- ('b',"acd")
 ctl_removeAt :: Int -> [a] -> (a, [a])
 ctl_removeAt n xs
-    | n <= 0 || n >= length xs = error "out of bounds"
+    | n < 1 || n > length xs = error "out of bounds"
     | otherwise = foldl
         (\(a, as) (x, i) -> if i == n then (x, as) else (a, as ++ [x]))
         ((head xs), []) $ zip xs $ range (1, length xs)
