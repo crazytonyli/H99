@@ -140,3 +140,13 @@ main = hspec $ do
             ctl_range 1 1 `shouldBe` [1]
             ctl_range 1 2 `shouldBe` [1,2]
             ctl_range 1 3 `shouldBe` [1,2,3]
+
+    describe "Problem #23" $ do
+        it "extracts randomly selected elements from a list" $ do
+            r1 <- ctl_randomSelect "" 10
+            r2 <- ctl_randomSelect "abcd" 2
+            r3 <- ctl_randomSelect "abcd" 2
+            r4 <- ctl_randomSelect "abcd" 3
+            r1 `shouldBe` ""
+            r2 `shouldNotBe` r3
+            length r4 `shouldBe` 3

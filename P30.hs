@@ -4,9 +4,12 @@
 module P30
 ( ctl_insertAt
 , ctl_range
+, ctl_randomSelect
 ) where
 
+import P20
 import Data.Ix
+import System.Random
 
 -- Problem 21
 -- Insert an element at a given position into a list.
@@ -38,3 +41,20 @@ ctl_range start end
     | start > end   = error "start shouldn't be greater than end"
     | start == end  = [start]
     | otherwise     = ([start]++) $ ctl_range (start + 1) end
+
+
+-- Problem 23
+-- Extract a given number of randomly selected elements from a list.
+--
+-- Example:
+--
+-- Prelude System.Random>rnd_select "abcdefgh" 3 >>= putStrLn
+-- eda
+ctl_randomSelect :: [a] -> Int -> IO [a]
+ctl_randomSelect xs n
+    | n == 0 || length xs == 0 = return []
+    | otherwise = do
+        g <- newStdGen
+        (e, left) <- return $ ctl_removeAt (fst $ randomR (1, length xs) g) xs
+        r <- ctl_randomSelect left (n - 1)
+        return ([e] ++ r)
