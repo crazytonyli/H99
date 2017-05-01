@@ -1,6 +1,7 @@
 import P10
 import P20
 import P30
+import Data.Set
 import Test.Hspec
 import Control.Exception (evaluate)
 
@@ -150,3 +151,10 @@ main = hspec $ do
             r1 `shouldBe` ""
             r2 `shouldNotBe` r3
             length r4 `shouldBe` 3
+
+    describe "Problem #24" $ do
+        it "draw N different numbers from 1..M" $ do
+            r1 <- ctl_diffSelect 0 32
+            r2 <- ctl_diffSelect 5 32
+            length r1 `shouldBe` 0
+            length r2 `shouldBe` (size $ fromList r2)

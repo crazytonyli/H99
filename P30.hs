@@ -5,6 +5,7 @@ module P30
 ( ctl_insertAt
 , ctl_range
 , ctl_randomSelect
+, ctl_diffSelect
 ) where
 
 import P20
@@ -58,3 +59,14 @@ ctl_randomSelect xs n
         (e, left) <- return $ ctl_removeAt (fst $ randomR (1, length xs) g) xs
         r <- ctl_randomSelect left (n - 1)
         return ([e] ++ r)
+
+
+-- Problem 24
+-- Lotto: Draw N different random numbers from the set 1..M.
+--
+-- Example in Haskell:
+--
+-- Prelude System.Random>diff_select 6 49
+-- Prelude System.Random>[23,1,17,33,21,37]
+ctl_diffSelect :: Int -> Int -> IO [Int]
+ctl_diffSelect n m = ctl_randomSelect [1..m] n
