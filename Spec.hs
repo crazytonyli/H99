@@ -153,8 +153,13 @@ main = hspec $ do
             length r4 `shouldBe` 3
 
     describe "Problem #24" $ do
-        it "draw N different numbers from 1..M" $ do
+        it "draws N different numbers from 1..M" $ do
             r1 <- ctl_diffSelect 0 32
             r2 <- ctl_diffSelect 5 32
             length r1 `shouldBe` 0
             length r2 `shouldBe` (size $ fromList r2)
+
+    describe "Problem #26" $ do
+        it "generates C(N, K) combinations" $ do
+            (ctl_combinations 1 "abcd") `shouldBe` ["a", "b", "c", "d"]
+            (ctl_combinations 2 "abcd") `shouldBe` ["ab", "ac", "ad", "bc", "bd", "cd"]
